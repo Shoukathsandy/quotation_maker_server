@@ -151,8 +151,10 @@ router.post("/createvendorlist",async function(req,res){
     try {
         const data = req.body;
         const createlist = await createVendorlist(data);
+        console.log(createlist)
         res.status(200).send(createlist);
     } catch (error) {
+        console.log(error)
         res.status(500).send({error:"internal server error"})
     }
 });
