@@ -27,7 +27,8 @@ export async function passtokenset(email,randomString) {
 
 //create vendorlist
 export async function createVendorlist(data){
-    return await client.db("quotation").collection("vendorlist").insertMany(data);
+    console.log(data)
+    return await client.db("quotation").collection("vendorlist").insertOne(data);
 }
 //get all vendor list
 export async function getvendorlist(){
