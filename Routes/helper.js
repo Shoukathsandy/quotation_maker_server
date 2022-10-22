@@ -38,6 +38,10 @@ export async function getvendorlist(){
 export async function getvendorbyid(Email){
     return await client.db("quotation").collection("vendorlist").findOne({Email:Email})
 };
+//delete vendor
+export async function deletevendorbyemail(Email){
+    return await client.db("quotation").collection("vendorlist").deleteOne({Email:Email})
+}
 //edit vendorlist
 export async function updatevendorlist(Email,data){
     return await client.db("quotation").collection("vendorlist").updateOne({Email:Email},{$set:data});
@@ -58,6 +62,10 @@ export async  function getproductlist(){
 export async function updateproductlist(ItemNo,data){
     return await client.db("quotation").collection("productlist").updateOne({ItemNo},{$set:data});
 }
+//delete product
+export async function deleteproductbyitemno(ItemNo){
+    return await client.db("quotation").collection("productlist").deleteOne({ItemNo:ItemNo})
+}
 //crreate customerslist
 export  async function createcustormerlist(data){
     return await client.db("quotation").collection("customerlist").insertOne(data);
@@ -73,6 +81,10 @@ export async function getcustomerbyid(Email){
 }//edit customer details
 export async function updatecustomerbyid(Email,data){
     return await client.db("quotation").collection("customerlist").updateOne({Email:Email},{$set:data})
+}
+//delete customer
+export async function deletecustomerbyemail(Email){
+    return await client.db("quotation").collection("customerlist").deleteOne({Email:Email})
 }
 // create project list
 export async function createprojectlist(data){
@@ -90,10 +102,18 @@ export async function getprojectbyid(ProjectId){
 export async function editprojectbyid(ProjectId,data){
     return await client.db("quotation").collection("projectlist").updateOne({ProjectId:ProjectId},{$set:data});
 };
+//delete project
+export async function deleteprojectbyid(ProjectId){
+    return await client.db("quotation").collection("projectlist").deleteOne({ProjectId:ProjectId})
+}
 //create quotation
 export async function createquotation(data){
     return await client.db("quotation").collection("quotationlist").insertOne(data);
 };
+//create quotation data
+export async function createquotationdata(data){
+    return await client.db("quotation").collection("quotationdata").insertOne(data);
+}
 // get all quotation 
 export async function getallquotation(){
     return await client.db("quotation").collection("quotationlist").find({}).toArray();
@@ -105,4 +125,8 @@ export async function getquotationbytid(QuotationId){
 // update quotation 
 export async function updatequotation(QuotationId,data){
     return await client.db("quotation").collection("quotationlist").updateOne({QuotationId},{$set:data})
+}
+//delete quotation
+export async function deletequotationbyid(QuotationId){
+    return await client.db("quotation").collection("quotationlist").deleteOne({QuotationId:QuotationId})
 }

@@ -29,6 +29,12 @@ import {
     getquotationbytid,
     getallquotation,
     updatequotation,
+    createquotationdata,
+    deletevendorbyemail,
+    deleteproductbyitemno,
+    deletecustomerbyemail,
+    deleteprojectbyid,
+    deletequotationbyid,
 } from "./helper.js";
 
 const router = express.Router();
@@ -228,6 +234,22 @@ router.put("/:Email", async function (req, res) {
     }
 
 })
+//delete vendorlist
+router.delete("/deletevendor/:Email", async function (req, res) {
+    try {
+        console.log(req.params)
+        const data = req.body;
+        const { Email } = req.params;
+
+        const result = await deletevendorbyemail(Email);
+        console.log(result)
+        res.status(200).send({msg:"Successfully deleted"});
+
+    } catch (error) {
+        res.status(401).send({ error: "Internal server error" })
+    }
+
+})
 //create peroductlist
 router.post("/createproductslist", async function (req, res) {
     try {
@@ -263,7 +285,7 @@ router.get("/getproductlist/:ItemNo", async function (req, res) {
         const { ItemNo } = req.params;
         const product = await getproductbyidno(ItemNo);
         console.log(product)
-        product ? res.send(product) : res.send("Email not match");
+        product ? res.send(product) : res.send("ItemNo not match");
 
     } catch (error) {
         res.status(401).send({ error: "Internal server error" })
@@ -282,6 +304,22 @@ router.put("/:ItemNo", async function (req, res) {
     }
 });
 
+//delete product
+router.delete("/deleteproduct/:ItemNo", async function (req, res) {
+    try {
+        console.log(req.params)
+        const data = req.body;
+        const { ItemNo } = req.params;
+
+        const result = await deleteproductbyitemno(ItemNo);
+        console.log(result)
+        res.status(200).send({msg:"Successfully deleted"});
+
+    } catch (error) {
+        res.status(401).send({ error: "Internal server error" })
+    }
+
+})
 //create custormer list
 router.post("/createcustomerlist",async function(req,res){
     try {
@@ -337,6 +375,23 @@ router.get("/getcustomerbyemail/:Email",async function(req,res){
     } catch (error) {
         res.status(401).send({ error: "Internal server error" })
     }
+})
+
+//delete customer
+router.delete("/deletecustomer/:Email", async function (req, res) {
+    try {
+        console.log(req.params)
+        const data = req.body;
+        const { Email } = req.params;
+
+        const result = await deletecustomerbyemail(Email);
+        console.log(result)
+        res.status(200).send({msg:"Successfully deleted"});
+
+    } catch (error) {
+        res.status(401).send({ error: "Internal server error" })
+    }
+
 })
 
 //create projectlist
@@ -398,7 +453,24 @@ router.put("/updateprojectdetailsbyid/:ProjectNo",async function(req,res){
         res.status(401).send({ error: "Internal server error" })
     }
 });
-// create quotation
+
+//delete project
+router.delete("/deleteproject/:ProjectId", async function (req, res) {
+    try {
+        console.log(req.params)
+        const data = req.body;
+        const { ProjectId } = req.params;
+
+        const result = await deleteprojectbyid(ProjectId);
+        console.log(result)
+        res.status(200).send({msg:"Successfully deleted"});
+
+    } catch (error) {
+        res.status(401).send({ error: "Internal server error" })
+    }
+
+})
+// create get quotation
 router.post("/createquotation",async function(req,res){
     try {
         const data = req.body;
@@ -416,6 +488,18 @@ router.post("/createquotation",async function(req,res){
         res.status(401).send({ error: "Internal server error" })
     }
 });
+
+
+// create quotation data 
+router.post("/quotationdata", async function(req,res){
+    try {
+        const data = req.body;
+    const result = await createquotationdata(data);
+        res.status(200).send(result);
+    } catch (error) {
+        res.status(401).send({ error: "Internal server error" })
+    }
+})
 //get all quotation list
 router.get("/getallquotationlist",async function(req,res){
     try {
@@ -457,6 +541,23 @@ router.put("/updatequotation/:QuotationId",async function(req,res){
     } catch (error) {
         res.status(401).send({ error: "Internal server error" })
     }
+})
+
+//delete quotation
+router.delete("/deletequotation/:QuotationId", async function (req, res) {
+    try {
+        console.log(req.params)
+        const data = req.body;
+        const { QuotationId } = req.params;
+
+        const result = await deletequotationbyid(QuotationId);
+        console.log(result)
+        res.status(200).send({msg:"Successfully deleted"});
+
+    } catch (error) {
+        res.status(401).send({ error: "Internal server error" })
+    }
+
 })
 
 export const Quotation_Maker_Route = router;
