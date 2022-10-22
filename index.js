@@ -16,7 +16,7 @@ const PORT = process.env.PORT || 5000;
 const MONGO_URL = process.env.MONGO_URL;
 
 app.get("/",function(req,res){
-    res.send("this is home page for Quotation Maker project..")
+    res.send("this is home page for Quotation Maker project server..")
 });
 
 async function createConnection (){
